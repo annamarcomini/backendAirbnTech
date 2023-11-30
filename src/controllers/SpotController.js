@@ -26,10 +26,10 @@ module.exports = {
    user: user_id,
    thumbnail: filename,
    company,
-   techs: techs.split(',').map(tech=> tech.trim()), //trim tira os espaços em branco
+   techs: techs.split(',').map(tech=> tech.trim()),
    price,
   })
 
   return res.json(spot)
- }
+}
 }
