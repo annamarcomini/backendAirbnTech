@@ -1,32 +1,44 @@
- const express = require("express");
- const mongoose = require("mongoose");
- const cors= require("cors");
- const routes = require("./routes");
+const express = require("express")
+const mongoose = require("mongoose")
+const cors = require("cors")
+const path = require("path")
+const routes = require("./routes")
+const socketio = require("socket.io")
+const http = require("http")
 
- const app = express()
+const app = express()
+const server = http.createServer(app)
+const io = socketio(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    credentials: true,
+  }
+  })
 
- mongoose.connect(
-   "mongodb+srv://stack:stack@cluster0.bov2zyi.mongodb.net/semana09?retryWrites=true&w=majority"
- )
+mongoose
+  .connect(
+    "mongodb+srv://stack:stack@cluster0.bov2zyi.mongodb.net/semana09?retryWrites=true&w=majority"
+   )
 
- //req.query= acessar query params (para filtros)
- //req.params= acessar route params (edição e delete)
- //req.body= acessar corpo da requisição(para criação, edição )
+   
+  const connectedUsers = {}
 
- app.use(cors());
- app.use(express.json());
- app.use(function (req, res, next) {
-   req.rawBody = ""
-   req.setEncoding("utf8")
+  io.on("connection", (socket) => {
+    const { user_id } = socket.handshake.query
+    connectedUsers[user_id] = socket.id
+  })
 
-   req.on("data", function (chunk) {
-     req.rawBody += chunk
-   })
+  app.use( (req,res,next) => {
+    req.io = io;
+    req.connectedUsers = connectedUsers;
 
-   req.on("end", function () {
-     next()
-   })
- })
- app.use(routes);
+    return next();
+  })
 
- app.listen(3333);
+app.use(cors())
+app.use(express.json())
+app.use("/files", express.static(path.resolve(__dirname, "..", "uploads")))
+app.use(routes)
+
+server.listen(3333)
