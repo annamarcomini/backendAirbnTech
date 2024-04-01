@@ -28,7 +28,7 @@ O Back end do site Airbnb Tech foi desenvolvido com o objetivo de criar uma api 
 - Baixe o código/ Download the code
 -  Execute Yarn/ Run Yarn command
 - Execute Yarn dev/ Run Yarn dev command
-  Para criar sua própria credencial no banco de dados você deve/ To create your own credential in the database you must:
+- Para criar sua própria credencial no banco de dados você deve/ To create your own credential in the database you must:
 - Acesse o site do banco de dados/ Access the database website: https://www.mongodb.com/cloud/atlas/register
 - Se registre e crie uma conta/ Register and create an account
 - Crie um Cluster no modo free e nomeie ele/ Create a Cluster in free mode and name it
