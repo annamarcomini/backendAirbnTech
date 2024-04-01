@@ -24,7 +24,7 @@ This project was developed with the following technologies:
 
 O Back end do site Airbnb Tech foi desenvolvido com o objetivo de criar uma api para ser consumida no front- end, fazendo todas as chamadas necessárias para o site rodar como em um projeto em produção./ The Back end of the Airbnb Tech website was developed with the aim of creating an API to be consumed in the front-end, making all the necessary calls for the website to run as in a production project.
 
-## 🔖 How to run on your machine
+## 🔖 Como roda em sua máquina/ How to run on your machine
 - Baixe o código/ Download the code
 -  Execute Yarn/ Run Yarn command
 - Execute Yarn dev/ Run Yarn dev command
